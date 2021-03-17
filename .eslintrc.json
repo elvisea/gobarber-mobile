@@ -30,7 +30,7 @@
   "rules": {
     "prettier/prettier": "error",
     "import/no-duplicates": "off",
-    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/camelcase": "false",
     "no-unused-expressions": "off",
     "spaced-comment": "off",
     "react/prop-types": "off",

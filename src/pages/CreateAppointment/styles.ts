@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
-import {
-  getStatusBarHeight,
-  getBottomSpace,
-} from 'react-native-iphone-x-helper';
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { Provider } from '.';
+import { Provider } from '../Dashboard';
 
 interface ProviderContainerProps {
   selected: boolean;
@@ -24,20 +20,20 @@ interface HourTextProps {
   selected: boolean;
 }
 
-export const Container = styled.ScrollView.attrs({
-  contentContainerStyle: {
-    paddingBottom: getBottomSpace(),
-  },
-})``;
+export const Container = styled.View`
+  flex: 1;
+`;
 
 export const Header = styled.View`
   padding: 24px;
-  padding-top: ${getStatusBarHeight() + 24}px;
   background: #28262e;
 
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
+
+export const Content = styled.ScrollView``;
 
 export const BackButton = styled.TouchableOpacity``;
 
@@ -103,6 +99,20 @@ export const Title = styled.Text`
   margin: 0 24px 24px;
 `;
 
+export const OpenDatePickerButton = styled(RectButton)`
+  height: 46px;
+  background: #FF9000;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 32px;
+`;
+export const OpenDatePickerButtonText = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  font-size: 16px;
+  color: #232129;
+`;
+
 export const Schedule = styled.View`
   padding: 24px 0 16px;
 `;
@@ -126,11 +136,9 @@ export const SectionContent = styled.ScrollView.attrs({
   },
 })``;
 
-export const Hour = styled(RectButton).attrs((props: HourProps) => ({
-  enabled: props.available,
-}))<HourProps>`
+export const Hour = styled(RectButton)<HourProps>`
   padding: 12px;
-  background: ${props => (props.selected ? '#FF9000' : '#3e3b47')};
+  background: ${props => props.selected && props.available ? '#FF9000' : '#3e3b47'};
   border-radius: 10px;
   margin-right: 8px;
 
@@ -144,7 +152,7 @@ export const HourText = styled.Text<HourTextProps>`
 `;
 
 export const CreateAppointmentButton = styled(RectButton)`
-  background: #ff9000;
+  background: #FF9000;
   border-radius: 10px;
   height: 50px;
   margin: 0 24px 24px;
